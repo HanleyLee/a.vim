@@ -54,10 +54,6 @@ let s:defaultAlternateExtensionsDic = {
             \'aspx.vb': 'aspx',
             \'aspx': 'aspx.cs,aspx.vb',
             \ }
-let g:extraAlternativeExtensionsDic = {
-            \ 'm': 'h'
-            \ } 
-let g:overrideAlternativeExtensionsDic = {}
 
 " setup the default set of alternate extensions. The user can override in thier
 " .vimrc if the defaults are not suitable. To override in a .vimrc simply set a
