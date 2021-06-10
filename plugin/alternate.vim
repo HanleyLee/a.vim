@@ -391,11 +391,7 @@ function! s:DetermineExtension(path)
         if (has_key(s:alternateExtensionsDict, extension))
             return extension
         endif
-        let v:errmsg = ""
         silent! echo g:alternateExtensions_{extension}
-        if (v:errmsg == "")
-            return extension
-        endif
         let i = i + 1
     endwhile
     return ""
@@ -722,7 +718,6 @@ function! s:FindOrCreateBuffer(fileName, doSplit, findSimilar)
     let bang = a:doSplit[1]
     if (bufNr == -1)
         " Buffer did not exist....create it
-        let v:errmsg=""
         if (splitType == "h")
             silent! execute ":split".bang." " . FILENAME
         elseif (splitType == "v")
@@ -731,9 +726,6 @@ function! s:FindOrCreateBuffer(fileName, doSplit, findSimilar)
             silent! execute ":tab split".bang." " . FILENAME
         else
             silent! execute ":e".bang." " . FILENAME
-        endif
-        if (v:errmsg != "")
-            echo v:errmsg
         endif
     else
 
@@ -767,7 +759,6 @@ function! s:FindOrCreateBuffer(fileName, doSplit, findSimilar)
         let bufWindow = bufwinnr(bufNr)
         if (bufWindow == -1)
             " Buffer was not in a window so open one
-            let v:errmsg=""
             if (splitType == "h")
                 silent! execute ":sbuffer".bang." " . FILENAME
             elseif (splitType == "v")
@@ -777,15 +768,11 @@ function! s:FindOrCreateBuffer(fileName, doSplit, findSimilar)
             else
                 silent! execute ":buffer".bang." " . FILENAME
             endif
-            if (v:errmsg != "")
-                echo v:errmsg
-            endif
         else
             " Buffer is already in a window so switch to the window
             execute bufWindow."wincmd w"
             if (bufWindow != winnr())
                 " something wierd happened...open the buffer
-                let v:errmsg=""
                 if (splitType == "h")
                     silent! execute ":split".bang." " . FILENAME
                 elseif (splitType == "v")
@@ -794,9 +781,6 @@ function! s:FindOrCreateBuffer(fileName, doSplit, findSimilar)
                     silent! execute ":tab split".bang." " . FILENAME
                 else
                     silent! execute ":e".bang." " . FILENAME
-                endif
-                if (v:errmsg != "")
-                    echo v:errmsg
                 endif
             endif
         endif
