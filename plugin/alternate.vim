@@ -611,7 +611,7 @@ function! NextAlternate(bang)
     endif
 endfunction
 
-comm! -nargs=? -bang A call AlternateFile("n<bang>", <f-args>)
+comm! -nargs=? -bang A  call AlternateFile("n<bang>", <f-args>)
 comm! -nargs=? -bang AS call AlternateFile("h<bang>", <f-args>)
 comm! -nargs=? -bang AV call AlternateFile("v<bang>", <f-args>)
 comm! -nargs=? -bang AT call AlternateFile("t<bang>", <f-args>)
